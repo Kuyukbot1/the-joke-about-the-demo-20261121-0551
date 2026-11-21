@@ -1,12 +1,16 @@
-// The joke about the demo — make.fun entry.
-// Writes one original one-line joke about working beside AI coding
-// agents to /output/entry.txt. Node 22, standard library only.
-// Fully deterministic: same input, same bytes, every run. No network,
-// no randomness, no wall clock, no environment reads.
+// One-line joke about working beside an AI coding agent, for the
+// make.fun "joke about the demo" competition. Node 22, standard
+// library only. Writes the joke to /output/entry.txt.
+// Fully deterministic: no network, no randomness, no clock, no
+// environment reads — same bytes on every run.
 import { mkdirSync, writeFileSync } from "node:fs";
 
-const JOKE =
-  "My AI coding agent and I make a great team: it writes a thousand lines a minute, and I spend the rest of the day figuring out which one broke everything.\n";
+function buildJoke(): string {
+  const setup = "My coding agent swore the demo was crash-proof — so it deleted";
+  const punchline = "the demo, the backup, and my apology.";
+  return `${setup} ${punchline}\n`;
+}
 
-mkdirSync("/output", { recursive: true });
-writeFileSync("/output/entry.txt", JOKE, "utf8");
+const outDir = "/output";
+mkdirSync(outDir, { recursive: true });
+writeFileSync(`${outDir}/entry.txt`, buildJoke(), "utf8");
